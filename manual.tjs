@@ -17,7 +17,7 @@ class WaveSoundBuffer {
 	/**
 	 * サンプル値の取得（新方式）
 	 * @description getVisBuffer(buf, sampleCount, 1, sampleAhead)でサンプルを取得し，
-	 * (value/32768)^2の最大値を取得します。(0〜1の実数で返ります)
+	 * (value/32768)^2の最大値を取得します。(0～1の実数で返ります)
 	 * ※このプロパティを読み出すと暗黙でuseVisBuffer=trueに設定されます
 	 */
 	property sampleValue { getter; }

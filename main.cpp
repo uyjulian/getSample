@@ -1,4 +1,4 @@
-#include "ncbind/ncbind.hpp"
+#include "ncbind.hpp"
 
 //------------------------------------------------------------------------------------------------
 // 旧方式（互換のために残されています）
@@ -21,7 +21,7 @@ getSample(tTJSVariant *result,tjs_int numparams, tTJSVariant **param, iTJSDispat
 			tTJSVariant numsamples = n;
 			tTJSVariant channel    = 1;
 			tTJSVariant *p[3] = {&buffer, &numsamples, &channel};
-			if (TJS_SUCCEEDED(ret = objthis->FuncCall(0, L"getVisBuffer", NULL, NULL, 3, p, objthis))) {
+			if (TJS_SUCCEEDED(ret = objthis->FuncCall(0, TJS_W("getVisBuffer"), NULL, NULL, 3, p, objthis))) {
 				int c=0;
 				int sum = 0;
 				for (int i=0;i<n;i++) {
@@ -83,7 +83,7 @@ public:
 	/**
 	 * サンプル値の取得（新方式）
 	 * getVisBuffer(buf, sampleCount, 1, sampleAhead)でサンプルを取得し，
-	 * (value/32768)^2の最大値を取得します。(0〜1の実数で返ります)
+	 * (value/32768)^2の最大値を取得します。(0～1の実数で返ります)
 	 * ※このプロパティを読み出すと暗黙でuseVisBuffer=trueに設定されます
 	 */
 	double getSampleValue() {
@@ -150,9 +150,9 @@ NCB_GET_INSTANCE_HOOK(WaveSoundBufferAdd)
 
 // 登録
 NCB_ATTACH_CLASS_WITH_HOOK(WaveSoundBufferAdd, WaveSoundBuffer) {
-	Property(L"sampleValue", &Class::getSampleValue, (int)0);
-	Property(L"sampleCount", &Class::getSampleCount, &Class::setSampleCount);
-	Property(L"sampleAhead", &Class::getSampleAhead, &Class::setSampleAhead);
+	Property(TJS_W("sampleValue"), &Class::getSampleValue, (int)0);
+	Property(TJS_W("sampleCount"), &Class::getSampleCount, &Class::setSampleCount);
+	Property(TJS_W("sampleAhead"), &Class::getSampleAhead, &Class::setSampleAhead);
 }
 NCB_ATTACH_FUNCTION(setDefaultCounts, WaveSoundBuffer, WaveSoundBufferAdd::setDefaultCounts);
 NCB_ATTACH_FUNCTION(setDefaultAheads, WaveSoundBuffer, WaveSoundBufferAdd::setDefaultAheads);
