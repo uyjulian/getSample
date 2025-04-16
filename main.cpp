@@ -17,7 +17,7 @@ getSample(tTJSVariant *result,tjs_int numparams, tTJSVariant **param, iTJSDispat
 	if (n > 0 && result) {
 		short *buf = (short*)malloc(n * sizeof(*buf));
 		if (buf) {
-			tTJSVariant buffer     = (tjs_intptr_t)buf;
+			tTJSVariant buffer     = (tTVInteger)(tjs_intptr_t)buf;
 			tTJSVariant numsamples = n;
 			tTJSVariant channel    = 1;
 			tTJSVariant *p[3] = {&buffer, &numsamples, &channel};
@@ -67,7 +67,7 @@ public:
 			TVPAddLog(ttstr(TJS_W("useVisBuffer=1 failed: ")) + ttstr(r));
 
 		// getVisBuffer用の引数を作る
-		vBuffer     = (tjs_intptr_t)buf;
+		vBuffer     = (tTVInteger)(tjs_intptr_t)buf;
 		vChannel    = 1;
 		vNumSamples = counts;
 		vAheads     = aheads;
@@ -115,7 +115,7 @@ public:
 		counts = cnt;
 		delete[] buf;
 		buf = new short[counts];
-		vBuffer     = (tjs_intptr_t)buf;
+		vBuffer     = (tTVInteger)(tjs_intptr_t)buf;
 		vNumSamples = counts;
 	}
 	int  getSampleAhead() const  { return aheads; }
